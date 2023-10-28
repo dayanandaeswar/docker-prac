@@ -1,0 +1,37 @@
+docker run nginx (runs apps in without detached mode)
+docker run -d nginx  (runs app in detatched mode)
+docker ps (list the current running process)
+
+Remove the container
+====================
+
+docker rm --force $(docker ps -aq) -> Removes all the containers (we get error related to running containers)
+docker rm --force $(docker ps -aq) -> Removes all the containers forcefully(running contianers also will be removed)
+
+name the container
+==================
+
+docker stop webser (stopping the nammed container)
+docker start webser (starting the nameed container)
+
+docker run -d -p 8080:80 nginx  (runs app in detatched mode, links 8080 to 80 port)
+docker run -d -p 8080:80 -p 3000:80 --name webser nginx (providing the name to the container, multi port biding)
+
+Volumns
+=======
+
+docker run -d -p 8080:80 -p 3000:80 --name webser -v D:/Work/nginx-mount-location:/usr/share/nginx/html:ro nginx (links the location to the nginx application - read only)
+docker exec -it webser bash (for interacting with volumn)
+docker run -d -p 8080:80 -p 3000:80 --name webser -v D:/Work/nginx-mount-location:/usr/share/nginx/html:ro nginx
+docker run -d -p 8080:80 -p 3200:80 --name webser -v ${pwd}:/usr/share/nginx/html nginx (mount current working directory)
+docker run -d -p 8280:80 -p 4200:80 --name webser1 --volumes-from webser nginx (volumn share between multiple containers)
+
+
+Building images
+===============
+docker build --tag first-doc-img:latest . (for build the image)
+
+docker build --tag first-exp-api:latest .(running the express image build)
+
+docker run --name first-exp-api -d -p 3000:3000 first-exp-api:latest (running express api)
+
