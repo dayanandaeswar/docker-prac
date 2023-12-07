@@ -30,8 +30,113 @@ docker run -d -p 8280:80 -p 4200:80 --name webser1 --volumes-from webser nginx (
 Building images
 ===============
 docker build --tag first-doc-img:latest . (for build the image)
-
 docker build --tag first-exp-api:latest .(running the express image build)
-
 docker run --name first-exp-api -d -p 3000:3000 first-exp-api:latest (running express api)
+docker tag first-exp-api:latest first-exp-api:1 (for tagging latest with version)
 
+
+Inspect image
+=============
+
+docker inspect c30ab4477589
+
+LOGS
+====
+
+docker logs c30ab4477589
+
+EXECUTE
+==========
+
+docker exec -it c30ab4477589 /bin/sh
+
+Pusing your code
+==================
+
+docker push dayanandaeswar/first-doc-img:latest 
+
+docker pull dayanandaeswar/first-doc-img
+docker scout quickview dayanandaeswar/first-doc-img
+docker scout quickview dayanandaeswar/first-doc-img
+
+
+
+
+Kubernatees
+===================================
+
+minikube start --driver=docker
+
+minikube dashboard (for opening dashboard)
+
+minikube status
+
+kubectl get deployments
+
+kubectl get configmap
+
+kubectl get secrets
+
+kubectl get pod
+
+kubectl delete pod nginx-deployment-7b98c85986-dnspc (delete the pod)
+
+kubectl scale deployment nginx-deployment --replicas=0 (scale down complete deployment)
+
+
+kubectl port-forward service/nginx-deployment 8080:80
+
+
+Applying Deployment
+========================
+
+
+kubectl apply -f .\nginx-deployment.yaml
+
+
+
+create minikube cluster
+minikube start --vm-driver=hyperkit
+kubectl get nodes
+minikube status
+kubectl version
+
+delete cluster and restart in debug mode
+minikube delete
+minikube start --vm-driver=hyperkit --v=7 --alsologtostderr
+minikube status
+
+kubectl commands
+kubectl get nodes
+kubectl get pod
+kubectl get services
+kubectl create deployment nginx-depl --image=nginx
+kubectl get deployment
+kubectl get replicaset
+kubectl edit deployment nginx-depl
+
+debugging
+kubectl logs {pod-name}
+kubectl exec -it {pod-name} -- bin/bash
+
+create mongo deployment
+kubectl create deployment mongo-depl --image=mongo
+kubectl logs mongo-depl-{pod-name}
+kubectl describe pod mongo-depl-{pod-name}
+
+delete deplyoment
+kubectl delete deployment mongo-depl
+kubectl delete deployment nginx-depl
+
+create or edit config file
+vim nginx-deployment.yaml
+kubectl apply -f nginx-deployment.yaml
+kubectl get pod
+kubectl get deployment
+
+delete with config
+kubectl delete -f nginx-deployment.yaml
+#Metrics
+kubectl top The kubectl top command returns current CPU and memory usage for a cluster’s pods or nodes, or for a particular pod or node if specified.
+ 
+ 
