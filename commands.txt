@@ -2,6 +2,8 @@ docker run nginx (runs apps in without detached mode)
 docker run -d nginx  (runs app in detatched mode)
 docker ps (list the current running process)
 
+docker-compose up -d (to run the docker-compose.yml file)
+
 Remove the container
 ====================
 
